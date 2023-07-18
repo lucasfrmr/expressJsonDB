@@ -45,7 +45,7 @@ The main files and directories in this project are:
 
 - index.html: An example HTML file served by the application.
 
-- public/: A directory containing static files such as CSS stylesheets.
+- public/: A directory containing static files.
 
 Feel free to modify and extend this application as needed.
 

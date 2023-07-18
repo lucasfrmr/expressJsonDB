@@ -16,9 +16,7 @@ To install and run the application locally, follow these steps:
 
         npm i
 
-The application will start a server on port 9000. You can access it by opening a web browser and navigating to 
-
-    http://localhost:9000
+The default port is 9000. Ajust as needed.
 
 API Endpoints
  
@@ -28,7 +26,6 @@ API Endpoints
 
 
 The main files and directories in this project are:
-expressJsonDB/
 
     ├── app.mjs
     

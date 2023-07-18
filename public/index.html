@@ -1,0 +1,73 @@
+<!-- HTML code -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="counter-value">Loading...</div> <!-- Placeholder for counter value -->
+
+    <form id="my-form">
+        <!-- <button type="submit">Increment Counter</button> -->
+    </form>
+
+    <script>
+        // JavaScript code
+        const counterValueElement = document.getElementById('counter-value');
+        const formElement = document.getElementById('my-form');
+        
+        // Flag to track form submission
+        let submitted = false; 
+
+        // Function to fetch data and update the counter
+        function fetchDataAndUpdateCounter() {
+            // Fetch the current JSON data
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Increment the counter value if not yet submitted
+                    if (!submitted) {
+                        const updatedCounter = (data[0].counter || 0) + 1;
+                        console.log(updatedCounter);
+
+                        // Update the counter value on the page
+                        counterValueElement.textContent = `Current Counter Value: ${updatedCounter}`;
+
+                        // Send a POST request to update the JSON data
+                        fetch('/api/data', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ counter: updatedCounter }),
+                        })
+                            .then(response => response.text())
+                            .then(responseData => {
+                                console.log(responseData);
+                                // Handle response data as needed
+                                submitted = true; // Set the flag to true to prevent repeated incrementing
+
+                                // Remove the form submission event listener
+                                formElement.removeEventListener('submit', handleSubmit);
+                            })
+                            .catch(error => console.error(error));
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+
+        // Event listener for form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            fetchDataAndUpdateCounter();
+        }
+
+        // Add the form submission event listener
+        formElement.addEventListener('submit', handleSubmit);
+
+        // Initial fetch and counter update
+        fetchDataAndUpdateCounter();
+    </script>
+</body>
+</html>

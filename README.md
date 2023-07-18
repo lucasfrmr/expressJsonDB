@@ -16,7 +16,7 @@ To install and run the application locally, follow these steps:
 
         npm i
 
-The default port is 9000. Ajust as needed.
+Default port is 9000. Ajust as needed.
 
 API Endpoints
  
@@ -31,15 +31,13 @@ The main files and directories in this project are:
     
     ├── data.json
     
-    ├── index.html
-    
     ├── package.json
     
     ├── package-lock.json
     
     └── public/
     
-      └── styles.css
+      └── index.html
 
 - app.mjs: The main file containing the Express application logic.
 
